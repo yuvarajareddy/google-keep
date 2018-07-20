@@ -468,7 +468,6 @@ saveViewedCard.onclick = function(){
           }).catch(function(err) {
             console.log(err)
           });  
-
        
     }
 
