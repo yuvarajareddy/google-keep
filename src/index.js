@@ -409,7 +409,6 @@ saveViewedCard.onclick = function(){
        console.log("allTimeContent = ",allTimeContent);
 
 
-
         function memo(text, time, isChecked){
           this.text = text;
           this.time = time;
