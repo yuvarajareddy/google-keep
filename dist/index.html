@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Card</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<body> 
+ 
+<div class="container" id="myContainer">
+  <div class="row"> 
+    <button type="button" class="btn btn-primary" id="createNewCard" onclick="
+    createRow();" data-toggle="modal" data-target="#myModal">
+    Click to Create New Card
+  </button>
+
+  <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title"><input type="text" id="newCardTitle" placeholder="Enter title here"></h5>
+          <button type="button" id="saveCard" class="btn btn-success" >Save</button>
+           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> 
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" id="addItemsList">
+         
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+           <button type="button" id="addItems" class="btn btn-primary" >Add Items</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+    <!-- <button id="addCard">Click here to ADD new Card</button> -->
+  </div>
+  <div class="row" id="cardCol">
+    
+  </div>
+</div>
+
+<script type="text/javascript" src="bundle.js"></script></body>
+<script>
+      
+var record = [ 
+      {  "cardId" :  "card1",
+         "cardTitle" :"today task",
+         "listData" :
+          [ {"text" : "pen", "time" : "3:00", "isChecked" : true},
+            {"text" : "shirt", "time" : "3:10", "isChecked" : true},
+            {"text" : "shoe", "time" : "", "isChecked" : false}  ]
+      },
+      {  "cardId" :  "card2",
+         "cardTitle" :"saturday",
+         "listData" :
+          [ {"text" : "pen", "time" : "3:00", "isChecked" : true},
+            {"text" : "shirt", "time" : "3:10", "isChecked" : true},
+            {"text" : "shoe", "time" : "", "isChecked" : false}  ]
+      },
+      {  "cardId" :  "card3",
+         "cardTitle" :"monday",
+         "listData" :
+          [ {"text" : "pen", "time" : "3:00", "isChecked" : true},
+            {"text" : "shirt", "time" : "3:10", "isChecked" : true},
+            {"text" : "shoe", "time" : "", "isChecked" : false}  ]
+      },
+
+     {
+        "cardId" :  "card4",
+         "cardTitle" :"tommorow task",
+         "listData" :
+          [ {"text" : "pen11", "time" : "3:00", "isChecked" : true},
+          {"text" : "shirt11", "time" : "3:10", "isChecked" : true},
+           {"text" : "shoe11", "time" : "", "isChecked" : false}  ]
+     }     
+   
+    ];
+
+//console.log(container);
+//console.log("jsonarray  ",record);
+//console.log(record.length);
+var cardCol = document.querySelector("#cardCol");
+	//console.log(record.length);
+		for(var i=0; i<record.length; i++) {
+			 var card = document.createElement("div");
+			 card.className = "card";
+			 card.id = record[i].cardId;
+       card.style.height = "300px";
+       card.style.width = "300px";
+
+       var headerDiv = document.createElement("div");
+       headerDiv.id = "header-div";
+       var cardLabel = document.createElement("h1");
+       cardLabel.innerHTML = record[i].cardTitle;
+       headerDiv.appendChild(cardLabel);
+       card.appendChild(headerDiv);
+       
+       var bodyDiv = document.createElement("div");
+       bodyDiv.className = 'card-body';
+       bodyDiv.style.backgroundColor = '#d2cdcd';
+       
+       listData = record[i].listData;
+        for(var j=0;j<listData.length; j++){
+             var listObj = listData[j];
+            var paragraph = document.createElement("p");
+            paragraph.innerHTML = listObj.text;
+            bodyDiv.appendChild(paragraph);
+           }
+
+        card.appendChild(bodyDiv);
+cardCol.appendChild(card);
+}
+
+
+// function for addcard
+  var addItems = document.getElementById("addItems");
+  addItems.onclick = function() {
+    createRow();
+    
+  }
+
+ 
+
+  //create new card- for creating first row
+  // var createNewCard = document.getElementById("createNewCard");
+  // createNewCard.onclick = function() {
+  //  createRow();
+  // }
+
+  function createRow() {  
+    var addItemsList = document.getElementById("addItemsList");
+
+     var rowName = document.getElementsByName("rowName");
+     //console.log(rowName.length);
+
+     if(rowName.length <= 0){
+      var newRow = document.createElement("div");
+      var att = document.createAttribute("name");       
+      att.value = "rowName";                           
+      newRow.setAttributeNode(att); 
+      newRow.id = "row1";
+      newRow.className = "row dataDivs ";
+      addItemsList.appendChild(newRow);
+
+      var col1 = document.createElement("div");
+    var col2 = document.createElement("div");
+    col1.className = "col-md-1";
+    col2.className = "col-md-10";
+
+
+    var inputCheckbox = document.createElement("INPUT");
+    inputCheckbox.setAttribute("type", "checkbox");
+
+    col1.appendChild(inputCheckbox);
+    
+    var inputTextData = document.createElement("INPUT");
+    inputTextData.setAttribute("type", "text");
+    inputTextData.placeholder = "Enter list item here";
+    //inputTextData.innerHTML = "first";
+    col2.appendChild(inputTextData);
+    
+    newRow.appendChild(col1);
+    newRow.appendChild(col2);
+    //alert("if");
+    
+    addItemsList.appendChild(newRow);
+     }
+     else {
+      //alert("else");
+       // rowName.length
+        var newRow = document.createElement("div");
+      var att = document.createAttribute("name");       
+      att.value = "rowName";                           
+      newRow.setAttributeNode(att); 
+      newRow.id = "row"+(rowName.length+1);
+      newRow.className = "row dataDivs ";
+      addItemsList.appendChild(newRow);
+
+      var col1 = document.createElement("div");
+    var col2 = document.createElement("div");
+    col1.className = "col-md-1";
+    col2.className = "col-md-10";
+
+
+    var inputCheckbox = document.createElement("INPUT");
+    inputCheckbox.setAttribute("type", "checkbox");
+
+    col1.appendChild(inputCheckbox);
+    
+    var inputTextData = document.createElement("INPUT");
+
+    inputTextData.setAttribute("type", "text");
+    inputTextData.placeholder = "Enter list item here";
+    //inputTextData.value = "prashant";
+    col2.appendChild(inputTextData);
+    newRow.appendChild(col1);
+    newRow.appendChild(col2);
+    addItemsList.appendChild(newRow);
+     }
+  }
+
+   // save work - values into json
+  var saveCard = document.getElementById("saveCard");
+  saveCard.onclick = function saveJson(){
+
+        var lastInsertedCardId = record[record.length-1].cardId;
+        var newCardId = lastInsertedCardId.substring(4);
+        newCardId = ++newCardId;
+        newCardId = 'card'+newCardId;
+
+
+        var newCardTitle = document.querySelector("#newCardTitle").value;
+        //console.log(newCardTitle);
+        var newlistData = "[ ";
+        var allTextContent = document.querySelectorAll("#addItemsList input[type=text]");
+        var allCheckBoxContent = document.querySelectorAll("#addItemsList input[type=checkbox]");
+        var object = {
+          "text" : "",
+          "time" : "",
+          "isChecked" : ""
+        };
+       // var arrayObject = "[";
+         var content ="[";
+        for(var k=0; k<allTextContent.length; k++){
+         
+          content += "{ text : " +allTextContent[k].value + ", time : " + "5:00" + ", isChecked : " + allCheckBoxContent[k].checked+"}";
+           
+            if(k!=allTextContent.length-1)
+              content += ",";
+            else
+              content += "]";
+        }
+            
+
+        var newCardObject = {
+          "cardId" : newCardId,
+          "cardTitle" : newCardTitle,
+          "listData" : content
+        };
+        console.log(newCardObject);
+       
+  }
+</script>
+</html>

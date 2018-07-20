@@ -1,0 +1,55 @@
+
+body {
+	background-color: #fefbd8;
+}
+.createCard{
+
+	justify-content: center;
+}
+.deleteBtn{
+ background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.btn-success{
+	color: red;
+	background-color: white;
+}
+.pagination{
+ 
+	justify-content: center;
+}
+@media (max-width: 600px) {
+	   .row{
+	        width: 100%;
+	        align-items: center;
+	            }
+	.col-md-1{
+		width: 40%;
+	}
+	.col-md-5{
+		width: 40%;
+
+	}
+}
+@media (max-width: 320px) {
+     
+	.main {
+	         width: 100%;
+	    }
+	    
+	.row{
+	        width: 100%;
+	    }
+	    .col-md-1{
+		width: 40%;
+	}
+	.col-md-5{
+		width: 40%;
+
+	}
+}
+
