@@ -24,11 +24,19 @@ function getCards() {
 
   })
 }
+//code to add a new list item if we press Enter key
+     $('#addItemsList').keypress(function(event){
+       var keycode = (event.keyCode ? event.keyCode : event.which);
+       if(keycode == '13'){
+         createRow(event);  
+       }
+     });
 
  $( function() {
     $( ".sortable" ).sortable();
     $( ".sortable" ).disableSelection();
   } );
+ // code to display cards on the page
 var globalData = [];
 function showCards(record) {
   var cardCol = document.getElementById("cardCol");
@@ -57,7 +65,6 @@ function showCards(record) {
         for(var j=0;j<listData.length; j++){
              var listObj = listData[j];
 
-//********************
       var newRow = document.createElement("div");
      
       newRow.className = "row";
@@ -93,8 +100,6 @@ function showCards(record) {
     //alert("if");
     
     bodyDiv.appendChild(newRow);
-
-
 
            }
 
@@ -136,11 +141,14 @@ function showCards(record) {
         buttonRow.appendChild(viewButton);
 
         card.appendChild(buttonRow);
-cardCol.appendChild(card);
-globalData = record;
+        cardCol.appendChild(card);
+        globalData = record;
 }
 }
-
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#newCardTitle').trigger('focus');
+        $('#addItems').trigger('focus');
+    });
 
 // function for addcard
   var addItems = document.getElementById("addItems");
@@ -173,29 +181,29 @@ globalData = record;
       addItemsList.appendChild(newRow);
 
       var col1 = document.createElement("div");
-    var col2 = document.createElement("div");
-    col1.className = "col-md-1";
-    col2.className = "col-md-10";
+      var col2 = document.createElement("div");
+      col1.className = "col-md-1";
+      col2.className = "col-md-10";
 
 
-    var inputCheckbox = document.createElement("INPUT");
-    inputCheckbox.setAttribute("type", "checkbox");
+      var inputCheckbox = document.createElement("INPUT");
+      inputCheckbox.setAttribute("type", "checkbox");
 
-    col1.appendChild(inputCheckbox);
-    
-    var inputTextData = document.createElement("INPUT");
-    inputTextData.setAttribute("type", "text");
-    inputTextData.placeholder = "Enter list item here";
-    col2.appendChild(inputTextData);
-    
-    newRow.appendChild(col1);
-    newRow.appendChild(col2);
-    
-    addItemsList.appendChild(newRow);
+      col1.appendChild(inputCheckbox);
+      
+      var inputTextData = document.createElement("INPUT");
+      inputTextData.setAttribute("type", "text");
+      inputTextData.placeholder = "Enter list item here";
+      col2.appendChild(inputTextData);
+      
+      newRow.appendChild(col1);
+      newRow.appendChild(col2);
+      
+      addItemsList.appendChild(newRow);
      }
      else {
      
-        var newRow = document.createElement("div");
+      var newRow = document.createElement("div");
       var att = document.createAttribute("name");       
       att.value = "rowName";                           
       newRow.setAttributeNode(att); 
